@@ -13,7 +13,6 @@ data ={
 "name": "user",
 "email": "abdulsatter.ism@gmail.com",
 "phone": "+1234567890",
-"role": "USER",
 "password": "12345678"
 }
 
