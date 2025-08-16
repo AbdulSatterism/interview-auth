@@ -1,68 +1,156 @@
-# bdCalling Interview process
+---
 
-# All methods are POST
+# API Documentation
 
-## base url => http://192.168.10.70:3010/api/v1
+## Base URL:
 
-## create user => url: http://192.168.10.70:3010/api/v1/user/create-user
+```
+http://10.10.12.54:3000/api/v1
+```
 
-method: POST,
-data need send with form-data
-Input=>
-data ={
-"name": "user",
-"email": "abdulsatter.ism@gmail.com",
-"phone": "+1234567890",
-"password": "12345678"
-}
+---
 
-and
-send image with file , file name = image and formate => png, jpeg or jpg (formate)
+## Endpoints
 
-# Output=>
+### 1. **Create User**
 
-    {
-    "success": true,
-    "message": "Please check your email to verify your account."
+**Method**: `POST`
+**Endpoint**: `/user/create-user`
+**Description**: Creates a new user with data and an image file.
 
-}
+#### Input (FormData):
 
-## verify email => url: http://192.168.10.70:3010/api/v1/auth/verify-email
+- `name` (String): Full name of the user.
+- `email` (String): User's email address.
+- `password` (String): User's password.
+- `image` (File): User's profile image.
 
-method: POST,
-send email and oneTimeCode for verify email. oneTimeCode is number
-Input=>
-body :{
-"email": "abdulsatter.ism@gmail.com",
-"oneTimeCode":583174
-}
+#### Output:
 
-Output=>
+```json
 {
-"success": true,
-"message": "Your email has been successfully verified. Your account is now fully activated.",
-"data": {
-"accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ODM1MGNmMmQ2ODlhZjljYzQ3ZGFmMSIsInJvbGUiOiJVU0VSIiwiZW1haWwiOiJhYmR1bHNhdHRlci5pc21AZ21haWwuY29tIiwiaWF0IjoxNzM2NjU5MTk5LCJleHAiOjE3MzkyNTExOTl9.HRBhhmwaaVUYNKiGoT5p_1-W8mz0qKFofF3lIfAfsHs",
-"refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ODM1MGNmMmQ2ODlhZjljYzQ3ZGFmMSIsInJvbGUiOiJVU0VSIiwiZW1haWwiOiJhYmR1bHNhdHRlci5pc21AZ21haWwuY29tIiwiaWF0IjoxNzM2NjU5MTk5LCJleHAiOjE3NjgxOTUxOTl9.adfuWcTa2PahcMOE3N6fFmiXfxrxJLB_DP-DpvSGLEI"
+  "success": true,
+  "message": "Please check your email to verify your account."
 }
-}
+```
 
-## Login user => url: http://192.168.10.70:3010/api/v1/auth/login
+---
 
-method: POST,
-send email and password, password will be string
-Input=>
-body :{
-"email": "abdulsatter.ism@gmail.com",
-"password": "12345678"
-}
+### 2. **Email Verification**
 
-Output=>
+**Method**: `POST`
+**Endpoint**: `/auth/verify-email`
+**Description**: Verifies the user's email address using a one-time code.
+
+#### Input:
+
+```json
 {
-"success": true,
-"message": "User login successfully",
-"data": {
-"accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ODM1MGNmMmQ2ODlhZjljYzQ3ZGFmMSIsInJvbGUiOiJVU0VSIiwiZW1haWwiOiJhYmR1bHNhdHRlci5pc21AZ21haWwuY29tIiwiaWF0IjoxNzM2NjU5MjE5LCJleHAiOjE3MzkyNTEyMTl9.mlusij1b9NZaQHaDcZvXrKHIQiSMB22qe1fUNI66ifs",
-"refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ODM1MGNmMmQ2ODlhZjljYzQ3ZGFmMSIsInJvbGUiOiJVU0VSIiwiZW1haWwiOiJhYmR1bHNhdHRlci5pc21AZ21haWwuY29tIiwiaWF0IjoxNzM2NjU5MjE5LCJleHAiOjE3NjgxOTUyMTl9.R472lWcgFwncGGEJAz2su94tsqZdOGE0ClmfnwsEo70"
+  "email": "johndoe@example.com",
+  "oneTimeCode": 741603
 }
+```
+
+#### Output:
+
+```json
+{
+  "success": true,
+  "message": "Your email has been successfully verified. Your account is now fully activated.",
+  "data": {
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTAxNDQzMmVmNjE1Mjc5YmMyMmQwOSIsInJvbGUiOiJVU0VSIiwiZW1haWwiOiJqb2huZG9lQGV4YW1wbGUuY29tIiwiaWF0IjoxNzU1MzIxNzMxLCJleHAiOjE3NTc5MTM3MzF9.xvhzvY32T3f5wdTeB2bSb8KZAgA0BWYgYJl155U5fcc",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTAxNDQzMmVmNjE1Mjc5YmMyMmQwOSIsInJvbGUiOiJVU0VSIiwiZW1haWwiOiJqb2huZG9lQGV4YW1wbGUuY29tIiwiaWF0IjoxNzU1MzIxNzMxLCJleHAiOjE3ODY4NTc3MzF9.e0R8QHJJLbSOXs9b5gMK5czfHRco9Le2BTwAos-wicA"
+  }
 }
+```
+
+---
+
+### 3. **User Login**
+
+**Method**: `POST`
+**Endpoint**: `/auth/login`
+**Description**: Logs in a user with email and password.
+
+#### Input:
+
+```json
+{
+  "email": "alphabytes.gpt@gmail.com",
+  "password": "12345678"
+}
+```
+
+#### Output:
+
+```json
+{
+  "success": true,
+  "message": "User login successfully",
+  "data": {
+    "user": {
+      "_id": "686a63c11e3f704de3d8be69",
+      "name": "Abdul Satter",
+      "email": "abdulsatter.ism@gmail.com",
+      "googleId": "",
+      "role": "USER",
+      "image": "/default/user.jpg",
+      "subscription": false,
+      "isDeleted": false,
+      "verified": true,
+      "createdAt": "2025-07-06T11:53:37.732Z",
+      "updatedAt": "2025-07-06T11:55:13.239Z",
+      "__v": 0
+    },
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE2M2MxMWUzZjcwNGRlM2Q4YmU2OSIsInJvbGUiOiJVU0VSIiwiZW1haWwiOiJhYmR1bHNhdHRlci5pc21AZ21haWwuY29tIiwiaWF0IjoxNzUxODAzNTc4LCJleHAiOjE3NTQzOTU1Nzh9.kPQAVoMajOK_SCZ0EGecvnE74k3U-jdoibMMe9MuURo",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE2M2MxMWUzZjcwNGRlM2Q4YmU2OSIsInJvbGUiOiJVU0VSIiwiZW1haWwiOiJhYmR1bHNhdHRlci5pc21AZ21haWwuY29tIiwiaWF0IjoxNzUxODAzNTc4LCJleHAiOjE3ODMzMzk1Nzh9.uczp8yz-B_7bW43GfswX0gZ9JT5z1xrwxlert89WaY8"
+  }
+}
+```
+
+---
+
+### 4. **Update Profile**
+
+**Method**: `PATCH`
+**Endpoint**: `/user/update-profile`
+**Description**: Updates the user's profile information.
+
+#### Input (FormData):
+
+- `name` (String): Updated name of the user.
+- `email` (String): Updated email address.
+- `phone` (String): Updated phone number.
+- `image` (File): Updated profile image.
+
+#### Output:
+
+```json
+{
+  "success": true,
+  "message": "Profile updated successfully",
+  "data": {
+    "_id": "68a014432ef615279bc22d09",
+    "name": "mr. user",
+    "role": "USER",
+    "email": "johndoe@example.com",
+    "phone": "+1234567890",
+    "image": "/images/300fit-1755322270386.jpeg",
+    "verified": true,
+    "createdAt": "2025-08-16T05:16:51.223Z",
+    "updatedAt": "2025-08-16T05:31:10.697Z",
+    "__v": 0
+  }
+}
+```
+
+---
+
+### Notes:
+
+- **Error Handling**: The API will return a `success: false` along with an appropriate error message if the request fails.
+- **Authentication**: Use the `accessToken` returned from login or email verification for subsequent requests that require authentication.
+
+---
+
+This structure follows standard conventions, making the API documentation easy to read and understand.

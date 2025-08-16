@@ -4,6 +4,8 @@ import express, { NextFunction, Request, Response } from 'express';
 import fileUploadHandler from '../../middlewares/fileUploadHandler';
 import { UserController } from './user.controller';
 import { UserValidation } from './user.validation';
+import auth from '../../middlewares/auth';
+import { USER_ROLES } from '../../../enums/user';
 
 const router = express.Router();
 
@@ -42,8 +44,7 @@ router.post(
 
 // router.get('/all-user', auth(USER_ROLES.ADMIN), UserController.getAllUser);
 
-/*
-router.post(
+router.patch(
   '/update-profile',
   fileUploadHandler(),
   auth(USER_ROLES.USER, USER_ROLES.ADMIN),
@@ -75,8 +76,6 @@ router.post(
     }
   },
 );
-
-*/
 
 // router.post(
 //   '/update-profile',
