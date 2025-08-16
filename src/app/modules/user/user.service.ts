@@ -79,7 +79,11 @@ const updateProfileToDB = async (
   }
 
   if (!isExistUser) {
-    throw new ApiError(StatusCodes.NOT_FOUND, 'Blog not found');
+    throw new ApiError(StatusCodes.NOT_FOUND, 'user not found');
+  }
+
+  if (!isExistUser.verified) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'user not found verified');
   }
 
   if (payload.image && isExistUser.image) {
